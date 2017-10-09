@@ -2,19 +2,34 @@
 # encoding: utf-8
 
 from flask import Flask, request, render_template
+import json
+from models import *
+
 app = Flask(__name__)
+
+def getdata(key='data'):
+    data = request.form.get(key)
+    data = json.loads(data)
+    return data
 
 @app.route('/', methods=['POST', 'GET'])
 def add():
-    error = None
-    if request.method == 'POST':
-        if valid_login(request.form['username'],
-                       request.form['password']):
-            return log_the_user_in(request.form['username'])
-        else:
-            error = 'Invalid username/password'
 
-    return render_template('main.html', error=error)
+    if request.method == 'POST':
+        word = request.form.get('word')
+        trans = request.form.get('trans')
+        try:
+            from_ins = Word.get(Word.word == word)
+            from_ins.count += 1
+            if from_ins.trans and trans not in from_ins.trans:
+                from_ins.trans += ',' + trans
+            from_ins.save()
+        except Word.DoesNotExist:
+            from_ins = Word(word=word, trans=trans, count=1)
+            from_ins.save()
+
+    words = Word.select().order_by(Word.count.desc())
+    return render_template('main.html', words=words)
 
 
 if __name__ == "__main__":
