@@ -18,17 +18,23 @@
     <![endif]-->
   </head>
   <body>
-    <div style="width:100%;text-align:center">
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link active">Simple Dict</a>
+  </li>
+</ul>
     <form method="post">
-        <div class="input-group">
+        <div class="input-group input-group-lg">
           <span class="input-group-addon" id="basic-addon1">Word</span>
           <input name=word type="text" class="form-control" placeholder="word" aria-describedby="basic-addon1">
         </div>
-        <div class="input-group">
+        <br>
+        <div class="input-group input-group-lg">
           <span class="input-group-addon" id="basic-addon1">Trans</span>
           <input name=trans type="text" class="form-control" placeholder="trans" aria-describedby="basic-addon1">
         </div>
-        <p><input type=submit value=ADD>
+        <br>
+        <input type=submit class="btn btn-primary btn-lg btn-block" value=ADD>
     </form>
     <table class="table">
         <thead>
@@ -48,7 +54,6 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
