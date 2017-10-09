@@ -14,6 +14,6 @@ def add():
         else:
             error = 'Invalid username/password'
 
-    return render_template('login.html', error=error)
+    return render_template('main.html', error=error)
 
 
